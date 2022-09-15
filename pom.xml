@@ -25,6 +25,8 @@
 
     </dependencies>
 
+
+
     <build>
         <plugins>
             <plugin>
@@ -67,7 +69,7 @@
                                 <rule>
                                     <limits>
                                         <limit>
-                                            <counter>LINE</counter>
+                                            <counter>INSTRUCTION</counter>
                                             <value>COVEREDRATIO</value>
                                             <minimum>100%</minimum>
                                         </limit>
@@ -78,6 +80,40 @@
                     </execution>
 
                 </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>com.github.spotbugs</groupId>
+                <artifactId>spotbugs-maven-plugin</artifactId>
+                <version>4.7.1.1</version>
+                <dependencies>
+                    <!-- overwrite dependency on spotbugs if you want to specify the version of spotbugs -->
+                    <dependency>
+                        <groupId>com.github.spotbugs</groupId>
+                        <artifactId>spotbugs</artifactId>
+                        <version>4.7.2</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <plugins>
+                        <plugin>
+                            <groupId>com.h3xstream.findsecbugs</groupId>
+                            <artifactId>findsecbugs-plugin</artifactId>
+                            <version>1.12.0</version>
+                        </plugin>
+                    </plugins>
+                </configuration>
+
+                <executions>
+                    <execution>
+                        <id>check</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+
             </plugin>
 
         </plugins>
